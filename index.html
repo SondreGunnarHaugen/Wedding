@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kari & Ola — Vi gifter oss!</title>
+    <title>Sara & Sondre — Vi gifter oss!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -41,14 +41,18 @@
             backdrop-filter: blur(5px);
             z-index: 1000;
             border-bottom: 1px solid rgba(163, 136, 97, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1.5rem;
         }
 
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
-            padding: 1rem;
-            gap: 2rem;
+            padding: 0.5rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
@@ -66,6 +70,17 @@
             color: var(--accent-color);
         }
 
+        .lang-select {
+            padding: 0.4rem 0.6rem;
+            border: 1px solid var(--accent-color);
+            background: var(--white);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         header {
             height: 100vh;
@@ -75,8 +90,9 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
+            /* Replace 'wedding-photo.jpg' with your uploaded photo name in GitHub */
             background: linear-gradient(rgba(253, 251, 247, 0.7), rgba(253, 251, 247, 0.7)),
-                        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+                        url('photo/123DA35B-BBC0-4C01-955F-729DB1930DDE.jpeg') center/cover no-repeat;
         }
 
         header h1 {
@@ -112,6 +128,18 @@
 
         .btn:hover {
             background-color: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px dashed var(--primary-color);
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
         }
 
         /* Sections */
@@ -150,28 +178,6 @@
             font-weight: 500;
             color: var(--accent-color);
             min-width: 70px;
-        }
-
-        /* Info Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .info-card {
-            background: var(--light-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .info-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
         }
 
         /* RSVP Form */
@@ -222,6 +228,34 @@
             cursor: pointer;
         }
 
+        .guest-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(163, 136, 97, 0.3);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .guest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #b33939;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -234,6 +268,10 @@
 
         /* Responsive */
         @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                padding: 0.8rem;
+            }
             header h1 { font-size: 2.8rem; }
             section { padding: 3rem 1rem; }
             .timeline-item { flex-direction: column; gap: 0.5rem; }
@@ -245,50 +283,55 @@
     <!-- Navigation -->
     <nav>
         <ul>
-            <li><a href="#hjem">Hjem</a></li>
-            <li><a href="#program">Program</a></li>
-            <li><a href="#info">Informasjon</a></li>
-            <li><a href="#rsvp">Svar på invitasjon</a></li>
+            <li><a href="#hjem" data-i18n="nav_home">Hjem</a></li>
+            <li><a href="#program" data-i18n="nav_program">Program</a></li>
+            <li><a href="#info" data-i18n="nav_info">Informasjon</a></li>
+            <li><a href="#rsvp" data-i18n="nav_rsvp">Svar på invitasjon</a></li>
         </ul>
+        <select id="lang-switcher" class="lang-select">
+            <option value="no" selected>Norsk</option>
+            <option value="en">English</option>
+            <option value="vi">Tiếng Việt</option>
+        </select>
     </nav>
 
     <!-- Hero Section -->
     <header id="hjem">
-        <h1>Kari & Ola</h1>
-        <p class="date">Lørdag 3. Juli 2027 — St. Pauls kirke</p>
-        <a href="#rsvp" class="btn">Svar her</a>
+        <h1>Sara & Sondre</h1>
+        <p class="date" data-i18n="hero_date">Lørdag 3. Juli 2027 — St. Pauls kirke</p>
+        <a href="#rsvp" class="btn" data-i18n="hero_btn">Svar her</a>
     </header>
 
     <!-- Program Section -->
     <section id="program">
-        <h2>Dagens Program</h2>
+        <h2 data-i18n="program_title">Dagens Program</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-time">11:00</div>
                 <div>
-                    <h3>Vielse</h3>
-                    <p>St. Pauls Kirke</p>
+                    <h3 data-i18n="prog_1_title">Vielse</h3>
+                    <p data-i18n="prog_1_desc">St. Pauls Kirke</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-time">15:00</div>
                 <div>
-                    <h3>Velkomstdrink & Velkomst</h3>
-                    <p>Selskapslokalet Kulturfabrikken Hetlevik, Askøy</p>
+                    <h3 data-i18n="prog_2_title">Velkomstdrink & Velkomst</h3>
+                    <p data-i18n="prog_2_desc">Selskapslokalet Kulturfabrikken Hetlevik, Askøy</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-time">17:00</div>
                 <div>
-                    <h3>Middag</h3>
-                    <p>Buffet</p>
+                    <h3 data-i18n="prog_3_title">Middag</h3>
+                    <p data-i18n="prog_3_desc">Buffet</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-time">20:00</div>
                 <div>
-                    <h3>Kake, Dans & Fest</h3>
-                    <p>Vi åpner baren og danser ut i de sene nattetimer!</p>
+                    <h3 data-i18n="prog_4_title">Kake, Dans & Fest</h3>
+                    <p data-i18n="prog_4_desc">Vi åpner baren og danser ut i de sene nattetimer!</p>
                 </div>
             </div>
         </div>
@@ -296,76 +339,236 @@
 
     <!-- Practical Info Section -->
     <section id="info">
-        <h2>Praktisk Informasjon</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Kleskode</h3>
-                <p><strong>Mørk dress / Aftenantrekk</strong><br>Vi ønsker at alle pynter seg litt ekstra for dagen!</p>
-            </div>
-            <div class="info-card">
-                <h3>Ønskeliste</h3>
-                <p>Det viktigste for oss er at du kommer! Ønsker du likevel å gi en gave, har vi opprettet en ønskeliste hos Tilbords og Glasmagasinet.</p>
-            </div>
-            <div class="info-card">
-                <h3>Toastmastere</h3>
-                <p>Ønsker du å holde tale eller ha et innslag? Ta kontakt med våre toastmastere på e-post: <em>toastmaster@eksempel.no</em> innen 1. mai.</p>
-            </div>
-            <div class="info-card">
-                <h3>Overnatting</h3>
-                <p>Vi har reservert en del rom på Hotell Eksempel med rabattkode «KARIOLA2027».</p>
-            </div>
-        </div>
+        <h2 data-i18n="info_title">Praktisk Informasjon</h2>
+        <p style="text-align: center;" data-i18n="info_desc">Mer informasjon kommer fortløpende!</p>
     </section>
 
     <!-- RSVP Section -->
     <section id="rsvp">
         <div class="rsvp-section">
-            <h2>Svar på invitasjonen</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Vennligst svar senest <strong>1. april 2027</strong>.</p>
+            <h2 data-i18n="rsvp_title">Svar på invitasjonen</h2>
+            <p style="text-align: center; margin-bottom: 2rem;" data-i18n="rsvp_deadline">Vennligst svar senest <strong>1. Mai 2027</strong>.</p>
 
-            <!-- 
-                TIPS: For å motta svarene på e-post gratis med GitHub Pages, 
-                opprett en bruker på https://formspree.io og bytt ut URL-en under!
-            -->
             <form action="https://formspree.io/f/DIN_FORMSPREE_ID" method="POST">
                 <div>
-                    <label for="name">Fullt navn *</label>
-                    <input type="text" id="name" name="Navn" required placeholder="Ditt navn">
+                    <label for="name" data-i18n="label_name">Fullt navn *</label>
+                    <input type="text" id="name" name="Hovedgjest Navn" required placeholder="Ditt navn">
                 </div>
 
                 <div>
-                    <label for="email">E-postadresse *</label>
+                    <label for="email" data-i18n="label_email">E-postadresse *</label>
                     <input type="email" id="email" name="E-post" required placeholder="din@epost.no">
                 </div>
 
                 <div>
-                    <label>Kommer du? *</label>
+                    <label data-i18n="label_attending">Kommer du? *</label>
                     <div class="radio-group">
-                        <label><input type="radio" name="Deltakelse" value="Ja, jeg kommer!" required> Ja, jeg/vi kommer!</label>
-                        <label><input type="radio" name="Deltakelse" value="Nei, kan dessverre ikke"> Desverre, jeg kan ikke</label>
+                        <label><input type="radio" name="Deltakelse" value="Ja, jeg kommer!" required> <span data-i18n="radio_yes">Ja, jeg/vi kommer!</span></label>
+                        <label><input type="radio" name="Deltakelse" value="Nei, kan dessverre ikke"> <span data-i18n="radio_no">Dessverre, jeg kan ikke</span></label>
                     </div>
                 </div>
 
                 <div>
-                    <label for="allergies">Matallergier eller dietter</label>
-                    <input type="text" id="allergies" name="Allergier" placeholder="F.eks. vegetar, gluten, nøtter...">
+                    <label for="allergies" data-i18n="label_allergies">Matallergier eller dietter</label>
+                    <input type="text" id="allergies" name="Hovedgjest Allergier" placeholder="F.eks. vegetar, gluten, nøtter...">
                 </div>
 
+                <!-- Container for additional guests (family/kids) -->
+                <div id="additional-guests"></div>
+
+                <button type="button" class="btn btn-secondary" id="add-guest-btn" onclick="addGuest()" data-i18n="btn_add_guest">+ Legg til familiemedlem / ekstra gjest</button>
+
                 <div>
-                    <label for="message">Melding eller sangønske til festen?</label>
+                    <label for="message" data-i18n="label_message">Melding eller sangønske til festen?</label>
                     <textarea id="message" name="Melding" rows="4" placeholder="Skriv din melding her..."></textarea>
                 </div>
 
-                <button type="submit" class="btn" style="width: 100%;">Send svar</button>
+                <button type="submit" class="btn" style="width: 100%;" data-i18n="btn_submit">Send svar</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>Vi gleder oss til å feire dagen med dere!</p>
-        <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">Kari & Ola</p>
+        <p data-i18n="footer_msg">Vi gleder oss til å feire dagen med dere!</p>
+        <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">Sara & Sondre</p>
     </footer>
 
+    <!-- Translation and Dynamic Guests Script -->
+    <script>
+        // Language Translations Object
+        const translations = {
+            no: {
+                nav_home: "Hjem",
+                nav_program: "Program",
+                nav_info: "Informasjon",
+                nav_rsvp: "Svar på invitasjon",
+                hero_date: "Lørdag 3. Juli 2027 — St. Pauls kirke",
+                hero_btn: "Svar her",
+                program_title: "Dagens Program",
+                prog_1_title: "Vielse",
+                prog_1_desc: "St. Pauls Kirke",
+                prog_2_title: "Velkomstdrink & Velkomst",
+                prog_2_desc: "Selskapslokalet Kulturfabrikken Hetlevik, Askøy",
+                prog_3_title: "Middag",
+                prog_3_desc: "Buffet",
+                prog_4_title: "Kake, Dans & Fest",
+                prog_4_desc: "Vi åpner baren og danser ut i de sene nattetimer!",
+                info_title: "Praktisk Informasjon",
+                info_desc: "Mer informasjon kommer fortløpende!",
+                rsvp_title: "Svar på invitasjonen",
+                rsvp_deadline: "Vennligst svar senest 1. Mai 2027.",
+                label_name: "Fullt navn *",
+                label_email: "E-postadresse *",
+                label_attending: "Kommer du? *",
+                radio_yes: "Ja, jeg/vi kommer!",
+                radio_no: "Dessverre, jeg kan ikke",
+                label_allergies: "Matallergier eller dietter",
+                btn_add_guest: "+ Legg til ledsager / barn / ekstra gjest",
+                label_message: "Melding eller sangønske til festen?",
+                btn_submit: "Send svar",
+                footer_msg: "Vi gleder oss til å feire dagen med dere!",
+                guest_title: "Ekstra Gjest",
+                guest_name: "Navn på ekstra gjest",
+                guest_allergy: "Allergier / diett",
+                btn_remove: "Fjern"
+            },
+            en: {
+                nav_home: "Home",
+                nav_program: "Schedule",
+                nav_info: "Information",
+                nav_rsvp: "RSVP",
+                hero_date: "Saturday, July 3, 2027 — St. Paul's Church",
+                hero_btn: "RSVP Here",
+                program_title: "Schedule of the Day",
+                prog_1_title: "Ceremony",
+                prog_1_desc: "St. Paul's Church",
+                prog_2_title: "Welcome Drinks",
+                prog_2_desc: "Kulturfabrikken Hetlevik, Askøy",
+                prog_3_title: "Dinner",
+                prog_3_desc: "Buffet",
+                prog_4_title: "Cake, Dancing & Party",
+                prog_4_desc: "The bar opens and we dance into the night!",
+                info_title: "Practical Information",
+                info_desc: "More details will be updated soon!",
+                rsvp_title: "RSVP",
+                rsvp_deadline: "Please respond by May 1st, 2027.",
+                label_name: "Full Name *",
+                label_email: "Email Address *",
+                label_attending: "Will you attend? *",
+                radio_yes: "Yes, I/we will attend!",
+                radio_no: "Sorry, I/we cannot make it",
+                label_allergies: "Dietary restrictions or allergies",
+                btn_add_guest: "+ Add partner / child / extra guest",
+                label_message: "Message or song request?",
+                btn_submit: "Submit RSVP",
+                footer_msg: "We look forward to celebrating with you!",
+                guest_title: "Additional Guest",
+                guest_name: "Guest's Name",
+                guest_allergy: "Allergies / Diet",
+                btn_remove: "Remove"
+            },
+            vi: {
+                nav_home: "Trang chủ",
+                nav_program: "Chương trình",
+                nav_info: "Thông tin",
+                nav_rsvp: "Xác nhận tham dự",
+                hero_date: "Thứ Bảy, ngày 3 tháng 7, 2027 — Nhà thờ St. Paul",
+                hero_btn: "Xác nhận ngay",
+                program_title: "Chương Trình Lễ Cưới",
+                prog_1_title: "Lễ Thành Hôn",
+                prog_1_desc: "Nhà thờ St. Paul",
+                prog_2_title: "Tiệc Đón Khách",
+                prog_2_desc: "Kulturfabrikken Hetlevik, Askøy",
+                prog_3_title: "Tiệc Tối",
+                prog_3_desc: "Tiệc Buffet",
+                prog_4_title: "Bánh Cưới & Khiêu Vũ",
+                prog_4_desc: "Mở quầy bar và khiêu vũ suốt đêm!",
+                info_title: "Thông Tin Cần Biết",
+                info_desc: "Các thông tin chi tiết sẽ sớm được cập nhật!",
+                rsvp_title: "Xác Nhận Tham Dự",
+                rsvp_deadline: "Vui lòng phản hồi trước ngày 1 tháng 5, 2027.",
+                label_name: "Họ và Tên *",
+                label_email: "Địa chỉ Email *",
+                label_attending: "Bạn sẽ đến dự chứ? *",
+                radio_yes: "Có, tôi/chúng tôi sẽ đến!",
+                radio_no: "Rất tiếc, tôi/chúng tôi không thể đến",
+                label_allergies: "Dị ứng thực phẩm hoặc chế độ ăn",
+                btn_add_guest: "+ Thêm người thân / con nhỏ / khách đi cùng",
+                label_message: "Lời nhắn hoặc yêu cầu bài hát?",
+                btn_submit: "Gửi phản hồi",
+                footer_msg: "Chúng tôi rất mong được đón tiếp bạn!",
+                guest_title: "Khách đi cùng",
+                guest_name: "Tên khách đi cùng",
+                guest_allergy: "Dị ứng / Chế độ ăn",
+                btn_remove: "Xóa"
+            }
+        };
+
+        let currentLang = 'no';
+        let guestCount = 0;
+
+        // Switch Language Function
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update dynamically created guest labels
+            document.querySelectorAll('.guest-title').forEach((el, idx) => {
+                el.textContent = `${translations[lang].guest_title} #${idx + 1}`;
+            });
+            document.querySelectorAll('.guest-name-label').forEach(el => {
+                el.textContent = translations[lang].guest_name;
+            });
+            document.querySelectorAll('.guest-allergy-label').forEach(el => {
+                el.textContent = translations[lang].guest_allergy;
+            });
+            document.querySelectorAll('.btn-remove').forEach(el => {
+                el.textContent = translations[lang].btn_remove;
+            });
+        }
+
+        document.getElementById('lang-switcher').addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        // Add Guest Function
+        function addGuest() {
+            guestCount++;
+            const container = document.getElementById('additional-guests');
+            const guestBox = document.createElement('div');
+            guestBox.className = 'guest-box';
+            guestBox.id = `guest-box-${guestCount}`;
+
+            guestBox.innerHTML = `
+                <div class="guest-header">
+                    <span class="guest-title">${translations[currentLang].guest_title} #${guestCount}</span>
+                    <button type="button" class="btn-remove" onclick="removeGuest(${guestCount})">${translations[currentLang].btn_remove}</button>
+                </div>
+                <div>
+                    <label class="guest-name-label">${translations[currentLang].guest_name}</label>
+                    <input type="text" name="Ekstra Gjest ${guestCount} Navn" required placeholder="...">
+                </div>
+                <div>
+                    <label class="guest-allergy-label">${translations[currentLang].guest_allergy}</label>
+                    <input type="text" name="Ekstra Gjest ${guestCount} Allergier" placeholder="...">
+                </div>
+            `;
+            container.appendChild(guestBox);
+        }
+
+        // Remove Guest Function
+        function removeGuest(id) {
+            const guestBox = document.getElementById(`guest-box-${id}`);
+            if (guestBox) {
+                guestBox.remove();
+            }
+        }
+    </script>
 </body>
 </html>
