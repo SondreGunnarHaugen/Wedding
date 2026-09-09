@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kari & Ola — Vi gifter oss!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --primary-color: #2c3e35;
+            --accent-color: #a38861;
+            --text-color: #333333;
+            --light-bg: #f4efe6;
+            --white: #ffffff;
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(163, 136, 97, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(253, 251, 247, 0.7), rgba(253, 251, 247, 0.7)),
+                        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+
+        header h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--primary-color);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        header p.date {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* Program / Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            border-left: 2px solid var(--accent-color);
+            padding-left: 1.5rem;
+        }
+
+        .timeline-time {
+            font-weight: 500;
+            color: var(--accent-color);
+            min-width: 70px;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .info-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* RSVP Form */
+        .rsvp-section {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: var(--white);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.8rem; }
+            section { padding: 3rem 1rem; }
+            .timeline-item { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hjem">Hjem</a></li>
+            <li><a href="#program">Program</a></li>
+            <li><a href="#info">Informasjon</a></li>
+            <li><a href="#rsvp">Svar på invitasjon</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hjem">
+        <h1>Kari & Ola</h1>
+        <p class="date">Lørdag 3. Juli 2027 — St. Pauls kirke</p>
+        <a href="#rsvp" class="btn">Svar her</a>
+    </header>
+
+    <!-- Program Section -->
+    <section id="program">
+        <h2>Dagens Program</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-time">11:00</div>
+                <div>
+                    <h3>Vielse</h3>
+                    <p>St. Pauls Kirke</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">15:00</div>
+                <div>
+                    <h3>Velkomstdrink & Velkomst</h3>
+                    <p>Selskapslokalet Kulturfabrikken Hetlevik, Askøy</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">17:00</div>
+                <div>
+                    <h3>Middag</h3>
+                    <p>Buffet</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">20:00</div>
+                <div>
+                    <h3>Kake, Dans & Fest</h3>
+                    <p>Vi åpner baren og danser ut i de sene nattetimer!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Info Section -->
+    <section id="info">
+        <h2>Praktisk Informasjon</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Kleskode</h3>
+                <p><strong>Mørk dress / Aftenantrekk</strong><br>Vi ønsker at alle pynter seg litt ekstra for dagen!</p>
+            </div>
+            <div class="info-card">
+                <h3>Ønskeliste</h3>
+                <p>Det viktigste for oss er at du kommer! Ønsker du likevel å gi en gave, har vi opprettet en ønskeliste hos Tilbords og Glasmagasinet.</p>
+            </div>
+            <div class="info-card">
+                <h3>Toastmastere</h3>
+                <p>Ønsker du å holde tale eller ha et innslag? Ta kontakt med våre toastmastere på e-post: <em>toastmaster@eksempel.no</em> innen 1. mai.</p>
+            </div>
+            <div class="info-card">
+                <h3>Overnatting</h3>
+                <p>Vi har reservert en del rom på Hotell Eksempel med rabattkode «KARIOLA2027».</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp">
+        <div class="rsvp-section">
+            <h2>Svar på invitasjonen</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Vennligst svar senest <strong>1. april 2027</strong>.</p>
+
+            <!-- 
+                TIPS: For å motta svarene på e-post gratis med GitHub Pages, 
+                opprett en bruker på https://formspree.io og bytt ut URL-en under!
+            -->
+            <form action="https://formspree.io/f/DIN_FORMSPREE_ID" method="POST">
+                <div>
+                    <label for="name">Fullt navn *</label>
+                    <input type="text" id="name" name="Navn" required placeholder="Ditt navn">
+                </div>
+
+                <div>
+                    <label for="email">E-postadresse *</label>
+                    <input type="email" id="email" name="E-post" required placeholder="din@epost.no">
+                </div>
+
+                <div>
+                    <label>Kommer du? *</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="Deltakelse" value="Ja, jeg kommer!" required> Ja, jeg/vi kommer!</label>
+                        <label><input type="radio" name="Deltakelse" value="Nei, kan dessverre ikke"> Desverre, jeg kan ikke</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="allergies">Matallergier eller dietter</label>
+                    <input type="text" id="allergies" name="Allergier" placeholder="F.eks. vegetar, gluten, nøtter...">
+                </div>
+
+                <div>
+                    <label for="message">Melding eller sangønske til festen?</label>
+                    <textarea id="message" name="Melding" rows="4" placeholder="Skriv din melding her..."></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Send svar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Vi gleder oss til å feire dagen med dere!</p>
+        <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">Kari & Ola</p>
+    </footer>
+
+</body>
+</html>
