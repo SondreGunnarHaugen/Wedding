@@ -42,17 +42,17 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(163, 136, 97, 0.2);
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 0.5rem 1.5rem;
+            padding: 1rem;
         }
 
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
-            padding: 0.5rem;
-            gap: 1.5rem;
+            padding: 0;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
@@ -70,17 +70,47 @@
             color: var(--accent-color);
         }
 
-        .lang-select {
-            padding: 0.4rem 0.6rem;
-            border: 1px solid var(--accent-color);
-            background: var(--white);
-            color: var(--primary-color);
-            border-radius: 4px;
-            font-family: var(--font-body);
+        /* Language Switcher in Top Right */
+        .lang-switcher {
+            position: absolute;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
             font-size: 0.85rem;
-            cursor: pointer;
+            color: var(--primary-color);
         }
 
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: var(--accent-color);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                padding: 0.8rem 1rem;
+                gap: 0.5rem;
+            }
+            .lang-switcher {
+                position: static;
+            }
+        }
         /* Hero Section */
         header {
             height: 100vh;
