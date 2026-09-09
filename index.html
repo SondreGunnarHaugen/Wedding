@@ -221,7 +221,6 @@
         }
 
         input[type="text"],
-        input[type="email"],
         select,
         textarea {
             width: 100%;
@@ -381,21 +380,11 @@
                 </div>
 
                 <div>
-                    <label for="email" data-i18n="label_email">E-postadresse *</label>
-                    <input type="email" id="email" name="E-post" required placeholder="din@epost.no">
-                </div>
-
-                <div>
                     <label data-i18n="label_attending">Kommer du? *</label>
                     <div class="radio-group">
                         <label><input type="radio" name="Deltakelse" value="Ja, jeg kommer!" required> <span data-i18n="radio_yes">Ja, jeg/vi kommer!</span></label>
                         <label><input type="radio" name="Deltakelse" value="Nei, kan dessverre ikke"> <span data-i18n="radio_no">Dessverre, jeg kan ikke</span></label>
                     </div>
-                </div>
-
-                <div>
-                    <label for="allergies" data-i18n="label_allergies">Matallergier eller dietter</label>
-                    <input type="text" id="allergies" name="Hovedgjest Allergier" placeholder="F.eks. vegetar, gluten, nøtter...">
                 </div>
 
                 <!-- Container for additional guests (family/kids) -->
@@ -404,7 +393,7 @@
                 <button type="button" class="btn btn-secondary" id="add-guest-btn" onclick="addGuest()" data-i18n="btn_add_guest">+ Legg til familiemedlem / ekstra gjest</button>
 
                 <div>
-                    <label for="message" data-i18n="label_message">Melding eller sangønske til festen?</label>
+                    <label for="message" data-i18n="label_message">Noe mer vi burde vite / sende helsning til brudeparet?</label>
                     <textarea id="message" name="Melding" rows="4" placeholder="Skriv din melding her..."></textarea>
                 </div>
 
@@ -422,7 +411,7 @@
     <!-- Translation and Dynamic Guests Script -->
     <script>
         // REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKNZo9QOLCsYj9hU4ra0CkQCcM3aaQPRzNZCXBxybW5LhnZy8Nvo6Go84sNmewCNH-/exec";
+        const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
         // Language Translations Object
         const translations = {
@@ -447,18 +436,15 @@
                 rsvp_title: "Svar på invitasjonen",
                 rsvp_deadline: "Vennligst svar senest 1. Mai 2027.",
                 label_name: "Fullt navn *",
-                label_email: "E-postadresse *",
                 label_attending: "Kommer du? *",
                 radio_yes: "Ja, jeg/vi kommer!",
                 radio_no: "Dessverre, jeg kan ikke",
-                label_allergies: "Matallergier eller dietter",
                 btn_add_guest: "+ Legg til ledsager / barn / ekstra gjest",
-                label_message: "Melding eller sangønske til festen?",
+                label_message: "Noe mer vi burde vite / sende helsning til brudeparet?",
                 btn_submit: "Send svar",
                 footer_msg: "Vi gleder oss til å feire dagen med dere!",
                 guest_title: "Ekstra Gjest",
                 guest_name: "Navn på ekstra gjest",
-                guest_allergy: "Allergier / diett",
                 btn_remove: "Fjern"
             },
             en: {
@@ -482,18 +468,15 @@
                 rsvp_title: "RSVP",
                 rsvp_deadline: "Please respond by May 1st, 2027.",
                 label_name: "Full Name *",
-                label_email: "Email Address *",
                 label_attending: "Will you attend? *",
                 radio_yes: "Yes, I/we will attend!",
                 radio_no: "Sorry, I/we cannot make it",
-                label_allergies: "Dietary restrictions or allergies",
                 btn_add_guest: "+ Add partner / child / extra guest",
-                label_message: "Message or song request?",
+                label_message: "Anything else we should know / send a greeting to the couple?",
                 btn_submit: "Submit RSVP",
                 footer_msg: "We look forward to celebrating with you!",
                 guest_title: "Additional Guest",
                 guest_name: "Guest's Name",
-                guest_allergy: "Allergies / Diet",
                 btn_remove: "Remove"
             },
             vi: {
@@ -517,18 +500,15 @@
                 rsvp_title: "Xác Nhận Tham Dự",
                 rsvp_deadline: "Vui lòng phản hồi trước ngày 1 tháng 5, 2027.",
                 label_name: "Họ và Tên *",
-                label_email: "Địa chỉ Email *",
                 label_attending: "Bạn sẽ đến dự chứ? *",
                 radio_yes: "Có, tôi/chúng tôi sẽ đến!",
                 radio_no: "Rất tiếc, tôi/chúng tôi không thể đến",
-                label_allergies: "Dị ứng thực phẩm hoặc chế độ ăn",
                 btn_add_guest: "+ Thêm người thân / con nhỏ / khách đi cùng",
-                label_message: "Lời nhắn hoặc yêu cầu bài hát?",
+                label_message: "Có điều gì khác chúng tôi cần biết / gửi lời chúc đến cô dâu chú rể?",
                 btn_submit: "Gửi phản hồi",
                 footer_msg: "Chúng tôi rất mong được đón tiếp bạn!",
                 guest_title: "Khách đi cùng",
                 guest_name: "Tên khách đi cùng",
-                guest_allergy: "Dị ứng / Chế độ ăn",
                 btn_remove: "Xóa"
             }
         };
@@ -559,9 +539,6 @@
             document.querySelectorAll('.guest-name-label').forEach(el => {
                 el.textContent = translations[lang].guest_name;
             });
-            document.querySelectorAll('.guest-allergy-label').forEach(el => {
-                el.textContent = translations[lang].guest_allergy;
-            });
             document.querySelectorAll('.btn-remove').forEach(el => {
                 el.textContent = translations[lang].btn_remove;
             });
@@ -583,10 +560,6 @@
                 <div>
                     <label class="guest-name-label">${translations[currentLang].guest_name}</label>
                     <input type="text" name="Ekstra Gjest ${guestCount} Navn" required placeholder="...">
-                </div>
-                <div>
-                    <label class="guest-allergy-label">${translations[currentLang].guest_allergy}</label>
-                    <input type="text" name="Ekstra Gjest ${guestCount} Allergier" placeholder="...">
                 </div>
             `;
             container.appendChild(guestBox);
@@ -611,9 +584,7 @@
 
             // 1. Gather main guest info
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
             const attending = document.querySelector('input[name="Deltakelse"]:checked')?.value || '';
-            const allergies = document.getElementById('allergies').value;
             const message = document.getElementById('message').value;
 
             // 2. Gather additional guests
@@ -622,23 +593,25 @@
 
             guestBoxes.forEach((box) => {
                 const guestName = box.querySelector('input[name*="Navn"]')?.value;
-                const guestAllergy = box.querySelector('input[name*="Allergier"]')?.value;
                 if (guestName) {
-                    additionalGuestsList.push(`${guestName} (Allergies: ${guestAllergy || 'None'})`);
+                    additionalGuestsList.push(guestName);
                 }
             });
 
-            // 3. Payload object
+            // 3. Calculate total attendees count (Main guest + Additional guests if attending, otherwise 0)
+            const isAttending = attending.includes('Ja') || attending.includes('Yes') || attending.includes('Có');
+            const totalAttendees = isAttending ? (1 + additionalGuestsList.length) : 0;
+
+            // 4. Payload object
             const payload = {
                 name: name,
-                email: email,
                 attending: attending,
-                allergies: allergies,
-                additionalGuests: additionalGuestsList.join('; '),
+                totalAttendees: totalAttendees,
+                additionalGuests: additionalGuestsList.join(', '),
                 message: message
             };
 
-            // 4. Send payload to Google Sheets
+            // 5. Send payload to Google Sheets
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
