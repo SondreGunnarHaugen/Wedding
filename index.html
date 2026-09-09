@@ -374,7 +374,7 @@
             <h2 data-i18n="rsvp_title">Svar på invitasjonen</h2>
             <p style="text-align: center; margin-bottom: 2rem;" data-i18n="rsvp_deadline">Vennligst svar senest <strong>1. Mai 2027</strong>.</p>
 
-            <form action="https://formspree.io/f/DIN_FORMSPREE_ID" method="POST">
+            <form id="rsvpForm">
                 <div>
                     <label for="name" data-i18n="label_name">Fullt navn *</label>
                     <input type="text" id="name" name="Hovedgjest Navn" required placeholder="Ditt navn">
@@ -421,6 +421,9 @@
 
     <!-- Translation and Dynamic Guests Script -->
     <script>
+        // REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKNZo9QOLCsYj9hU4ra0CkQCcM3aaQPRzNZCXBxybW5LhnZy8Nvo6Go84sNmewCNH-/exec";
+
         // Language Translations Object
         const translations = {
             no: {
@@ -596,6 +599,71 @@
                 guestBox.remove();
             }
         }
+
+        // Handle Form Submission to Google Sheets
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.disabled = true;
+            submitBtn.innerText = "...";
+
+            // 1. Gather main guest info
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const attending = document.querySelector('input[name="Deltakelse"]:checked')?.value || '';
+            const allergies = document.getElementById('allergies').value;
+            const message = document.getElementById('message').value;
+
+            // 2. Gather additional guests
+            const guestBoxes = document.querySelectorAll('.guest-box');
+            let additionalGuestsList = [];
+
+            guestBoxes.forEach((box) => {
+                const guestName = box.querySelector('input[name*="Navn"]')?.value;
+                const guestAllergy = box.querySelector('input[name*="Allergier"]')?.value;
+                if (guestName) {
+                    additionalGuestsList.push(`${guestName} (Allergies: ${guestAllergy || 'None'})`);
+                }
+            });
+
+            // 3. Payload object
+            const payload = {
+                name: name,
+                email: email,
+                attending: attending,
+                allergies: allergies,
+                additionalGuests: additionalGuestsList.join('; '),
+                message: message
+            };
+
+            // 4. Send payload to Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                alert('Takk! Svaret ditt er registrert.');
+                
+                document.getElementById('rsvpForm').reset();
+                document.getElementById('additional-guests').innerHTML = '';
+                guestCount = 0;
+                
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                alert('Det oppstod en feil. Vennligst prøv igjen.');
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+            });
+        });
     </script>
 </body>
 </html>
