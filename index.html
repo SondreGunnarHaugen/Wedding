@@ -101,16 +101,6 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-                padding: 0.8rem 1rem;
-                gap: 0.5rem;
-            }
-            .lang-switcher {
-                position: static;
-            }
-        }
         /* Hero Section */
         header {
             height: 100vh;
@@ -120,7 +110,6 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            /* Replace 'wedding-photo.jpg' with your uploaded photo name in GitHub */
             background: linear-gradient(rgba(253, 251, 247, 0.7), rgba(253, 251, 247, 0.7)),
                         url('photo/123DA35B-BBC0-4C01-955F-729DB1930DDE.jpeg') center/cover no-repeat;
         }
@@ -300,7 +289,11 @@
         @media (max-width: 600px) {
             nav {
                 flex-direction: column;
-                padding: 0.8rem;
+                padding: 0.8rem 1rem;
+                gap: 0.5rem;
+            }
+            .lang-switcher {
+                position: static;
             }
             header h1 { font-size: 2.8rem; }
             section { padding: 3rem 1rem; }
@@ -318,11 +311,13 @@
             <li><a href="#info" data-i18n="nav_info">Informasjon</a></li>
             <li><a href="#rsvp" data-i18n="nav_rsvp">Svar på invitasjon</a></li>
         </ul>
-        <select id="lang-switcher" class="lang-select">
-            <option value="no" selected>Norsk</option>
-            <option value="en">English</option>
-            <option value="vi">Tiếng Việt</option>
-        </select>
+        <div class="lang-switcher">
+            <button type="button" class="lang-btn active" onclick="setLanguage('no', this)">NO</button>
+            <span>|</span>
+            <button type="button" class="lang-btn" onclick="setLanguage('en', this)">EN</button>
+            <span>|</span>
+            <button type="button" class="lang-btn" onclick="setLanguage('vi', this)">VI</button>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -539,7 +534,7 @@
         let guestCount = 0;
 
         // Switch Language Function
-        function setLanguage(lang) {
+        function setLanguage(lang, btnElement) {
             currentLang = lang;
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
@@ -547,6 +542,12 @@
                     element.textContent = translations[lang][key];
                 }
             });
+
+            // Highlight active language button
+            if (btnElement) {
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
 
             // Update dynamically created guest labels
             document.querySelectorAll('.guest-title').forEach((el, idx) => {
@@ -562,10 +563,6 @@
                 el.textContent = translations[lang].btn_remove;
             });
         }
-
-        document.getElementById('lang-switcher').addEventListener('change', (e) => {
-            setLanguage(e.target.value);
-        });
 
         // Add Guest Function
         function addGuest() {
